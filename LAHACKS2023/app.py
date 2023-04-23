@@ -36,12 +36,14 @@ def opticourse():
             ['Jane', '30', 'Female'],
             ['Bob', '35', 'Male'],
             ['Alice', '40', 'Female']]
+        
+        masterList = extractPrereqs.bigFunction(major)
 
         
         with open('myinputs.txt', 'a') as f:
             f.write(f"{college},{dept},{minor},{minor},{techBreadth},{artsHumSubGroup},{sciInqSubGroup},{socCultSubGroup},{topicElective},{numberQuarters},{topicGE},{easy},{current_time}\n")
 
-        return 'Inputs saved successfully!' + " " + str(extractPrereqs.extractPrereqs("course 100 or 110", "EC ENGR")) + " " + str(extractPrereqs.fat)
+        return 'Inputs saved successfully!' + str(masterList)
     
     return render_template('opticourse.html')
 

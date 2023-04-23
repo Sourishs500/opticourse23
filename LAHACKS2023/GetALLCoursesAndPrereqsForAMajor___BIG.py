@@ -16,6 +16,7 @@ from word2number.w2n import word_to_num
 #General Education Requirement Section Begins
 school = "Engineering"
 spreadsheet = "LA Hacks Opti-Course GE Map.xlsx"
+major = "Electrical Engineering B.S." #input
 
 
 Writing1Prompt = "Do you have Writing I satisfied? (you probably do if you have credit for some college-level English course)"
@@ -127,7 +128,6 @@ for i in ultimateGEDict.keys():
 #General Education Requirement Section Ends
 #To access the general education requirements, just ask for GEList
 
-major = "Electrical Engineering B.S." #input
 
 def depToCSV(department):
     #establishes the driver
@@ -383,4 +383,4 @@ for i in specificImportedDepartments:
     depToCSV(i)
     print(i)
     
-courses += GEList
+#courses += GEList

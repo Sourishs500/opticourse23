@@ -1,2 +1,4 @@
-Computer Science | | COM SCI 33, MATH 61, COM SCI M146
-Computational Genomics | | CHEM 20A, LIFESCI 7A, LIFESCI 7B
+Computer Science | | MATH 61, COM SCI 180, COM SCI M152A
+Computational Genomics | | LIFESCI 7A, LIFESCI 7B, LIFESCI 7C
+Engineering Mathematics | | MATH 61, MATH 115A, MATH 131A
+Technology Management | | ENGR 110, ENGR 111, ENGR 112

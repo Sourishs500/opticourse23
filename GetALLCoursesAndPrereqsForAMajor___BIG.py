@@ -13,6 +13,120 @@ from bs4 import BeautifulSoup
 from word2number.w2n import word_to_num
 
 
+#General Education Requirement Section Begins
+school = "Engineering"
+spreadsheet = "LA Hacks Opti-Course GE Map.xlsx"
+
+
+Writing1Prompt = "Do you have Writing I satisfied? (you probably do if you have credit for some college-level English course)"
+EthicsPlusEngWritingPrompt = "Would you like to satisfy the Ethics and Engineering Writing requirements with a single course?"
+SIPreferencePrompt = "Would you be willing to work harder for a physical science class or a life science class (you must pick one)?"
+SIPreferenceForLabPrompt = "Would you prefer to fulfill the 'lab' category when you do this harder class or would you prefer to knock out your Writing II requirement with this harder science class?"
+FLLevelPrompt = "What level of any foreign language do you think you can test into (1, 2, 3, 4, or 5)?"
+QuantPrompt = "Have you satisfied the Quantitative Reasoning requirement? (you probably have if you have taken college-level math courses before)"
+
+
+AH = True
+SC = True
+SI = True
+
+FL = (school in ["Letters and Sciences", "Arts and Architecture", "Music"])
+WritingII = (school!="Engineering")
+Diversity = not(school in ["Engineering", "Nursing"])
+EngWriting = (school=="Engineering")
+TechBreadth = (school=="Engineering")
+Ethics = (school=="Engineering")
+Quantitative = (school == "Arts and Architecture")
+
+
+df = (pd.read_excel(spreadsheet).applymap(lambda x: str(x).replace("\n", " ")).T
+                                .iloc[:7].T.rename(columns = {"Unnamed: 0":"School"})
+                                .iloc[1:].set_index("School"))
+
+numberOfGEs = sum([sum(eval(i)[0]) for i in df.loc[school].iloc[:3].values])
+
+
+#Determined by user input
+WritingIIDesiredArea = "LCA"
+DiversityDesiredArea = "SA"
+WritingI = False
+if FL:
+    FL = True
+if Quantitative:
+    Quantitative = True
+preferenceDictionary = (
+    {
+     'Arts/Humanities':{
+           "LCA":1,
+           "VPAA":2,
+           "PLA":3,
+          },
+     'Society/Culture':{
+           "SA":2,
+           "HA":1,
+          },
+     'Scientific Inquiry':{
+           "PS":1,
+           "LS":2,
+          }
+    }
+)
+#Determined by user input
+
+mainGEs = df.loc[school].iloc[:3]
+
+orderDictionary = {    
+    'Arts/Humanities':["LCA", "PLA", "VPAA"],
+    'Society/Culture':["HA", "SA"],
+    'Scientific Inquiry':["LS", "PS"]
+    }
+
+ultimateGEDict = {}
+
+for area in orderDictionary.keys():
+    courseReqsForArea = list(eval(df.loc[school].loc[area])[0])
+    #print(courseReqsForArea)
+    for i in range(len(orderDictionary[area])):
+        
+        currentCourseAsSetByMe = orderDictionary[area][i]
+        #print(currentCourseAsSetByMe)
+        
+        rankingOfCurrentCourse = preferenceDictionary[area][currentCourseAsSetByMe]+len(orderDictionary[area])-1
+        courseReqsForArea[i] += courseReqsForArea[rankingOfCurrentCourse]
+    courseReqsForArea = courseReqsForArea[:len(orderDictionary[area])]
+    #print(courseReqsForArea)
+    
+    ultimateGEDict[area] = pd.DataFrame(index = orderDictionary[area], 
+                                        columns = ["Course Count", "Writing II", 
+                                                   "Diversity"])
+    ultimateGEDict[area]["Course Count"] = courseReqsForArea
+    if WritingIIDesiredArea in orderDictionary[area] and WritingII:
+        ultimateGEDict[area].at[WritingIIDesiredArea, "Writing II"] = 1
+    if DiversityDesiredArea in orderDictionary[area] and Diversity:
+        ultimateGEDict[area].at[DiversityDesiredArea, "Diversity"] = 1
+import random
+setOfCourses = pd.read_excel("Easy Classes @UCLA.xlsx", skiprows = 2)
+setOfCourses = setOfCourses[setOfCourses.columns[:7]].iloc[:19].fillna("")
+GEList = []
+j = 0
+for i in ultimateGEDict.keys():
+    for k in ultimateGEDict[i].index:
+        possibleCoursesInNarrow = setOfCourses[setOfCourses.columns[j]].values
+        possibleCoursesInNarrow = [i for i in possibleCoursesInNarrow if i!=""]
+        #print(k)
+        #print(possibleCoursesInNarrow)
+        while ultimateGEDict[i].loc[k]["Course Count"] > 0:
+            pickGE = random.randint(0, len(possibleCoursesInNarrow)-1)
+            while possibleCoursesInNarrow[pickGE] in GEList:
+                pickGE = random.randint(0, len(possibleCoursesInNarrow)-1)
+            ultimateGEDict[i].at[k, "Course Count"] -= 1
+            GEList.append(possibleCoursesInNarrow.pop(pickGE))
+        #print(GEList)
+        j += 1
+
+#General Education Requirement Section Ends
+#To access the general education requirements, just ask for GEList
+
 major = "Electrical Engineering B.S." #input
 
 def depToCSV(department):
@@ -268,3 +382,5 @@ departmentPlusCoursesPlusPrereqs = {}
 for i in specificImportedDepartments:
     depToCSV(i)
     print(i)
+    
+courses += GEList

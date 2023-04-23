@@ -12,7 +12,7 @@ import time
 from bs4 import BeautifulSoup
 import requests
 
-school = "Letters and Sciences"#"Engineering"
+school = "Engineering"
 spreadsheet = "LA Hacks Opti-Course GE Map.xlsx"
 
 
@@ -83,16 +83,16 @@ ultimateGEDict = {}
 
 for area in orderDictionary.keys():
     courseReqsForArea = list(eval(df.loc[school].loc[area])[0])
-    print(courseReqsForArea)
+    #print(courseReqsForArea)
     for i in range(len(orderDictionary[area])):
         
         currentCourseAsSetByMe = orderDictionary[area][i]
-        print(currentCourseAsSetByMe)
+        #print(currentCourseAsSetByMe)
         
         rankingOfCurrentCourse = preferenceDictionary[area][currentCourseAsSetByMe]+len(orderDictionary[area])-1
         courseReqsForArea[i] += courseReqsForArea[rankingOfCurrentCourse]
     courseReqsForArea = courseReqsForArea[:len(orderDictionary[area])]
-    print(courseReqsForArea)
+    #print(courseReqsForArea)
     
     ultimateGEDict[area] = pd.DataFrame(index = orderDictionary[area], 
                                         columns = ["Course Count", "Writing II", 
@@ -103,9 +103,30 @@ for area in orderDictionary.keys():
     if DiversityDesiredArea in orderDictionary[area] and Diversity:
         ultimateGEDict[area].at[DiversityDesiredArea, "Diversity"] = 1
 
-for i in ultimateGEDict.keys():
-    print(ultimateGEDict[i])
+#for i in ultimateGEDict.keys():
+#    print(ultimateGEDict[i])
 
+
+
+import random
+setOfCourses = pd.read_excel("Easy Classes @UCLA.xlsx", skiprows = 2)
+setOfCourses = setOfCourses[setOfCourses.columns[:7]].iloc[:19].fillna("")
+GEList = []
+j = 0
+for i in ultimateGEDict.keys():
+    for k in ultimateGEDict[i].index:
+        possibleCoursesInNarrow = setOfCourses[setOfCourses.columns[j]].values
+        possibleCoursesInNarrow = [i for i in possibleCoursesInNarrow if i!=""]
+        #print(k)
+        #print(possibleCoursesInNarrow)
+        while ultimateGEDict[i].loc[k]["Course Count"] > 0:
+            pickGE = random.randint(0, len(possibleCoursesInNarrow)-1)
+            while possibleCoursesInNarrow[pickGE] in GEList:
+                pickGE = random.randint(0, len(possibleCoursesInNarrow)-1)
+            ultimateGEDict[i].at[k, "Course Count"] -= 1
+            GEList.append(possibleCoursesInNarrow.pop(pickGE))
+        #print(GEList)
+        j += 1
 
 
 
@@ -115,6 +136,7 @@ for i in ultimateGEDict.keys():
 #soupy = BeautifulSoup(page.text, "html.parser")
 #print(soupy.prettify())
 
+'''
 class narrowCategory:
     def __init__(self, name, link):
         self.name = name
@@ -136,7 +158,7 @@ print(departments[0][0].text)
 
 #print(len(allDivs))
 driver.quit()
-
+'''
 
 
 

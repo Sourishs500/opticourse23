@@ -13,66 +13,92 @@
       </nav>
     </div>
 
-    <!--School, Dept, Major, Tech Breadth dropdowns-->
+    <!--Information form-->
     <div>
+    <form>
+      
       <label for="school-select">School:</label>
-      <select id="school-select" onchange="deptDropdown()">
+      <select id="school-select" class="field" name="college">
         <option value="">Select an option</option>
         <option value="Engineering">Samueli School of Engineering</option>
       </select>
-    </div>
+      <style>
+        
+      </style>
 
-    <div id="dept-dropdown"></div>
+      <label for="dept-select">Department:</label>
+      <select id="dept-select" class="field" name="dept">
+       <option value="">Select an option</option>
+       <option value="Civil/Envr">Department of Civil/Environmental Engineering</option>
+        <option value="Mech/Aero">Department of Mechanical/Aerospace Engineering</option>
+        <option value="ECE">Department of Electrical/Computer Engineering</option>
+      </select>
+      
+      <label for="major-select">Choose a major from your Dept:</label>
+      <select id="major-select" class="field" name="major">
+        <option value="">Select an option</option>
+        <option value="Civil">Civil Engineering</option>
+        <option value="Enviro">Environmental Engineering</option>
+        <option value="EE">Electrical Engineering</option>          
+        <option value="CE">Computer Engineering</option>
+        <option value="MechE">Mechanical Engineering</option>
+        <option value="AeroE">Aerospace Engineering</option>
+      </select>
 
-    <div id="major-dropdown"></div>
+      <label for="minor-select">Choose a minor:</label>
+        <select id="minor-select" class="field" name="minor">
+        <option value="">Select a minor</option>
+        <option value="None">No minor</option>
+        <option value="Chem">Bioinformatics</option>
+        <option value="Gen chem">Data Science</option>
+        <option value="Biochem">Environmental Engineering</option>
+      </select>
 
-    <div id="minor-dropdown"></div>
+      <label for="techBreadth-select">Choose a technical breadth area:</label>
+      <select id="techBreadth-select" class="field" name="techbreadth">
+        <option value="">Select a tech breadth</option>
+        <option value="CS">Computer Science</option>
+        <option value="EE">Electrical Engineering</option>
+        <option value="MechE">Mechanical Engineering</option>
+        <option value="Materials">Materials Science/Engineering</option>
+        <option value="Biomed">Biomedical Engineering/Engineering</option>
+        <option value="Civil/Enviro">Civil/Environmental Engineering</option>
+      </select>
 
-    <div id="techBreadth-dropdown"></div>
+      <label for="quantity">Quarters:</label>
+      <input type="number" id="quarter-select" min="9" max="15" required class="field" name="numberQuarters">
 
-    <div id="quarters-amount"></div>
-
-    <div id="submit-button-A">
-
+      <p class="field">Rank GE Category Top Choice:</p>
+      <o1>
+        <li>
+          <label for="Arts/Humanities">Arts/Humanities:</label>
+          <select id="arts-hum" name="artsHumSubGroup">
+            <option value="lit-cult">Literary/Cultural Analysis</option>
+            <option value="phil-ling">Philosophical/Linguistic Analysis</option>
+            <option vlaue="visual-perf">Visual/Performing Arts</option>
+          </select>
+        </li>
+        <li>
+          <label for="Society/Culture">Society/Culture:</label>
+          <select id="soc-cult" name="socCultSubGroup">
+            <option value="his">Historical Analysis</option>
+            <option value="soc">Social Analysis</option>
+          </select>
+        </li>
+        <li>
+          <label for="Science">Scientific Inquiry:</label>
+          <select id="soc-cult" name="sciInqSubGroup">
+            <option value="his">Life Sciences</option>
+            <option value="soc">Physical Sciences</option>
+          </select>
+        </li>
+      </o1>
+      
       <button type="submit" id="submit-button-Basic" value="Submit" onClick="return checkForm()">Submit</button>
 
-      <script>
-        function checkForm() {
-          var schoolField = document.getElementById("school-select");
-          if (schoolField.value === "") {
-            alert("School must be selected!");
-            return false;
-          } else {
-            var deptField = document.getElementById("dept-select");
-            if (deptField.value === "") {
-              alert("Department must be selected!");
-              return false;
-            } else {
-              var majorField = document.getElementById("major-select");
-              if (majorField.value === "") {
-                alert("Major must be selected!");
-                return false;
-              } else {
-                var minorField = document.getElementById("minor-select");
-                if (minorField.value === "") {
-                  alert("Minor must be selected!");
-                  return false;
-                } else {
-                  var techBreadthField = document.getElementById("techBreadth-select");
-                  if (techBreadthField.value === "") {
-                    alert("Tech breadth must be selected!");
-                    return false;
-                  }
-                }
-              }
-            }
-          }
-          alert("Success!");
-          sendToFlask();
-          return true;
-        }
-      </script>
+    </form>
     </div>
+    
 
   </body>
 </html>

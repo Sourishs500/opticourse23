@@ -14,7 +14,7 @@ from bs4 import BeautifulSoup
 #establishes the driver
 
 allLinks = pd.read_csv("DepartmentsAndLinks.csv").set_index("Department")
-department = "Asian American Studies"#"Electrical and Computer Engineering"
+department = "Electrical and Computer Engineering"
 #print(allLinks.loc["Electrical and Computer Engineering"]["Link to Courses"])
 sampleDepartment = allLinks.loc[department]["Link to Courses"]
 

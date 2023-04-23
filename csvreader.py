@@ -1,8 +1,8 @@
 import pandas as pd
 
-dept = "Asian American Studies"
+dept = "Electrical and Computer Engineering"
 
-df = pd.read_csv("ASIAN_AMERICAN_STUDIES_HTML_Courses.csv")
+df = pd.read_csv("ECE_HTML_Courses.csv")
 
 raw = df['0'].values.tolist()
 
@@ -66,6 +66,28 @@ for i in range(len(reqs)):
     if (len(coreqs[i]) != 0):
         reqs[i] = reqs[i] + ", "
     requisites.append(reqs[i] + coreqs[i])
+
+for i in range(len(requisites)):
+    if len(requisites[i])>1:
+        requisites [i] = [k.replace(",", "") for k in requisites[i].split()]
+        #for j in len(requisites[i]):
+        
+            
+        if (requisites[i][0]=="course"):
+            if True in [m.isnumeric() for m in requisites[i][1]]:
+                requisites[i][0] = dept
+        elif requisites[i][0]=="courses":
+            if True in [m.isnumeric() for m in requisites[i][1]]:
+                requisites[i][0] = dept
+            if len(requisites[i])>=4:
+                requisites[i][3] = dept+" "+requisites[i][3]
+        requisites[i] = " ".join(requisites[i])
+            
+            #for j in range(1, len(requisites[i])):
+            
+        
+        #["course","M31B","is","a","good","course","to","know"]
+        
 
 finaldf = pd.DataFrame(list(zip(courselist, unitcounts, requisites, li)), columns=['Course Title', 'Unit Count', 'Requisites', 'Course Description'])
 finaldf["Requisites"] = finaldf["Requisites"].apply(lambda x: x.strip().rstrip())

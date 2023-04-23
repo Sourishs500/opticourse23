@@ -1,0 +1,11 @@
+hello,what,is,00:37:20
+my name is sourish,we are opticourse,lets go!,00:37:20
+hello my name is,sourish ,2,00:43:31
+hello my name is,sparsh,1,00:45:20
+Engineering,Mech/Aero,Chem,Chem,MechE,lit-cult,his,his,machine learnign,12,mythplogy,easy,01:03:26
+Engineering,Mech/Aero,None,None,CS,Visual/Performing Arts,soc,soc,computer architecture,12,astronomy,easy,01:03:26
+Engineering,Civil/Envr,Chem,Chem,Materials,phil-ling,his,soc,f,12,f,easy,06:01:56
+Engineering,Mech/Aero,Chem,Chem,MechE,phil-ling,soc,soc,machine learning,12,mythology,easy,06:03:08
+Engineering,Civil/Envr,,,EE,lit-cult,his,his,sadf,12,jf,easy,06:05:00
+,,Gen chem,Gen chem,MechE,lit-cult,his,his,dsfasd,12,dsafs,easy,06:05:44
+Engineering,Mech/Aero,Gen chem,Gen chem,Biomed,lit-cult,his,his,sdf,12,sdfas,easy,06:46:23

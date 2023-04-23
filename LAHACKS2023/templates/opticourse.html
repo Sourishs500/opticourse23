@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <!--Defining a class for centering text-->
+
+  <head>
+      <style>
+        .center {
+            text-align: center;
+        }
+      </style>
+      
+      <link rel="stylesheet" href="styles.css">
+      <script src="script.js"></script>
+      <title> Opticourse</title>
+  </head>
+  <body>
+    
+    <div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="opticourse.html">Plan Optimizer</a><br><br>
+      </nav>
+    </div>
+
+    <!--Information form-->
+    <div>
+    <form method = "POST">
+      
+      <!--SCHOOL INPUT-->
+      <label for="school-select">School:</label>
+      <select id="school-select" class="field" name="college">
+        <option value="">Select an option</option>
+        <option value="Engineering">Samueli School of Engineering</option>
+      </select><br>
+      <style>
+        
+      </style>
+
+      <!--DEPARTMENT INPUT-->
+      <label for="dept-select">Department:</label>
+      <select id="dept-select" class="field" name="dept">
+       <option value="">Select an option</option>
+       <option value="Civil/Envr">Department of Civil/Environmental Engineering</option>
+        <option value="Mech/Aero">Department of Mechanical/Aerospace Engineering</option>
+        <option value="ECE">Department of Electrical/Computer Engineering</option>
+      </select><br>
+      
+      <!--MAJOR INPUT-->
+      <label for="major-select">Choose a major from your Dept:</label>
+      <select id="major-select" class="field" name="major">
+        <option value="">Select an option</option>
+        <option value="Civil">Civil Engineering</option>
+        <option value="Enviro">Environmental Engineering</option>
+        <option value="EE">Electrical Engineering</option>          
+        <option value="CE">Computer Engineering</option>
+        <option value="MechE">Mechanical Engineering</option>
+        <option value="AeroE">Aerospace Engineering</option>
+      </select><br>
+
+      <!--MINOR INPUT-->
+      <label for="minor-select">Choose a minor:</label>
+        <select id="minor-select" class="field" name="minor">
+        <option value="">Select a minor</option>
+        <option value="None">No minor</option>
+        <option value="Chem">Bioinformatics</option>
+        <option value="Gen chem">Data Science</option>
+        <option value="Biochem">Environmental Engineering</option>
+      </select><br>
+
+      <!--TECH BREADTH INPUT-->
+      <label for="techBreadth-select">Choose a technical breadth area:</label>
+      <select id="techBreadth-select" class="field" name="techbreadth">
+        <option value="">Select a tech breadth</option>
+        <option value="CS">Computer Science</option>
+        <option value="EE">Electrical Engineering</option>
+        <option value="MechE">Mechanical Engineering</option>
+        <option value="Materials">Materials Science/Engineering</option>
+        <option value="Biomed">Biomedical Engineering/Engineering</option>
+        <option value="Civil/Enviro">Civil/Environmental Engineering</option>
+      </select><br>
+
+      <!--QUARTER NUMBER INPUT-->
+      <label for="quantity">Quarters:</label>
+      <input type="number" id="quarter-select" min="9" max="15" required class="field" name="numberQuarters"><br>
+
+      <!--GE CATEGORY INPUT-->
+      <p class="field">Rank GE Category Top Choice:</p>
+      <o1>
+        <li>
+          <label for="Arts/Humanities">Arts/Humanities:</label>
+          <select id="arts-hum" name="artsHumSubGroup">
+            <option value="lit-cult">Literary/Cultural Analysis</option>
+            <option value="phil-ling">Philosophical/Linguistic Analysis</option>
+            <option vlaue="visual-perf">Visual/Performing Arts</option>
+          </select><br>
+        </li>
+        <li>
+          <label for="Society/Culture">Society/Culture:</label>
+          <select id="soc-cult" name="socCultSubGroup">
+            <option value="his">Historical Analysis</option>
+            <option value="soc">Social Analysis</option>
+          </select><br>
+        </li>
+        <li>
+          <label for="Science">Scientific Inquiry:</label>
+          <select id="soc-cult" name="sciInqSubGroup">
+            <option value="his">Life Sciences</option>
+            <option value="soc">Physical Sciences</option>
+          </select><br>
+        </li>
+      </o1>
+      
+      <!--GE TOPIC INPUT-->
+      <label for="ge-keywords">GE Topics:</label>
+      <input type="text" id="ge-topic-select" required class="field" name="topicGE"><br>
+
+      <!--ELECTIVE INPUT-->
+      <label for="elective-keywords">Elective Topics:</label>
+      <input type="text" id="elective-topic-select" required class="field" name="topicElective"><br>
+
+      <!--DIFFICULTY INPUT-->
+      <label for="difficulty">GE Difficulty Preference:</label>
+        <select id="diff" name="easy" class="field">
+          <option value="easy">Easy</option>
+          <option value="hard">Hard</option>
+      </select><br>
+
+      <button type="submit" id="submit-button-Basic" value="Submit" onClick="return checkForm()">Submit</button>
+
+    </form>
+    </div>
+    
+
+  </body>
+
+
+</html>
+

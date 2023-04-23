@@ -20,8 +20,3 @@ Computational Genomics: LIFESCI 7A, LIFESCI 7B, LIFESCI 7C
 Engineering Mathematics: MATH 61, MATH 115A, MATH 131A
 Technology Management: ENGR 110, ENGR 111, ENGR 112
 '''
-
-print(getTechBreadthCourses("Computer Science"))
-print(getTechBreadthCourses("Computational Genomics"))
-print(getTechBreadthCourses("Engineering Mathematics"))
-print(getTechBreadthCourses("Technology Management"))

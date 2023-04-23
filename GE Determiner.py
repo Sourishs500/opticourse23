@@ -109,12 +109,33 @@ for i in ultimateGEDict.keys():
 
 
 
-theTrueGOATlink = "https://sa.ucla.edu/ro/Public/SOC/Search/SearchByFoundation?input=%7B%22FoundationCode%22%3A%22AH%22%2C%22CategoryCode%22%3A%22LC%22%2C%22LabDemoFilter%22%3Afalse%2C%22WritingTwoFilter%22%3Afalse%2C%22MultiCategoryFilter%22%3Afalse%2C%22DiversityFilter%22%3Afalse%7D&search_criteria=Foundations+of+Arts+and+Humanities&_=1682231470892"
-page = requests.get(theTrueGOATlink)
-soupy = BeautifulSoup(page.text, "html.parser")
-print(soupy.prettify())
+#theTrueGOATlink = "https://sa.ucla.edu/ro/Public/SOC/Search/SearchByFoundation?input=%7B%22FoundationCode%22%3A%22SI%22%2C%22CategoryCode%22%3A%22LS%22%2C%22LabDemoFilter%22%3Afalse%2C%22WritingTwoFilter%22%3Afalse%2C%22MultiCategoryFilter%22%3Afalse%2C%22DiversityFilter%22%3Afalse%7D&search_criteria=Foundations+of+Scientific+Inquiry&_=1682234942235"
+#page = requests.get(theTrueGOATlink)
+#time.sleep(1)
+#soupy = BeautifulSoup(page.text, "html.parser")
+#print(soupy.prettify())
 
+class narrowCategory:
+    def __init__(self, name, link):
+        self.name = name
+        self.link = link
+    
 
+url = "https://sa.ucla.edu/ro/Public/SOC/Search/SearchByFoundation?input=%7B%22FoundationCode%22%3A%22SI%22%2C%22CategoryCode%22%3A%22LS%22%2C%22LabDemoFilter%22%3Afalse%2C%22WritingTwoFilter%22%3Afalse%2C%22MultiCategoryFilter%22%3Afalse%2C%22DiversityFilter%22%3Afalse%7D&search_criteria=Foundations+of+Scientific+Inquiry"
+driver = webdriver.Chrome('chromedriver.exe')
+driver.get(url)
+time.sleep(2)
+allDivs = driver.find_elements(By.XPATH, "/html/body/div/div")
+
+departments = []
+for i in range(0, len(allDivs), 2):
+    departments.append(allDivs[i:i+2])
+
+print(departments[0][0].text)
+    
+
+#print(len(allDivs))
+driver.quit()
 
 
 

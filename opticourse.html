@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Opticourse</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="opticourse.html">Plan Optimizer</a>
+      </nav>
+    </div>
+
+    <!--School, Dept, Major, Tech Breadth dropdowns-->
+    <div>
+      <label for="school-select">School:</label>
+      <select id="school-select" onchange="deptDropdown()">
+        <option value="">Select an option</option>
+        <option value="Engineering">Samueli School of Engineering</option>
+      </select>
+    </div>
+
+    <div id="dept-dropdown"></div>
+
+    <div id="major-dropdown"></div>
+
+    <div id="minor-dropdown"></div>
+
+    <div id="techBreadth-dropdown"></div>
+
+    <div id="quarters-amount"></div>
+
+    <div id="submit-button-A">
+
+      <button type="submit" id="submit-button-Basic" value="Submit" onClick="return checkForm()">Submit</button>
+
+      <script>
+        function checkForm() {
+          var schoolField = document.getElementById("school-select");
+          if (schoolField.value === "") {
+            alert("School must be selected!");
+            return false;
+          } else {
+            var deptField = document.getElementById("dept-select");
+            if (deptField.value === "") {
+              alert("Department must be selected!");
+              return false;
+            } else {
+              var majorField = document.getElementById("major-select");
+              if (majorField.value === "") {
+                alert("Major must be selected!");
+                return false;
+              } else {
+                var minorField = document.getElementById("minor-select");
+                if (minorField.value === "") {
+                  alert("Minor must be selected!");
+                  return false;
+                } else {
+                  var techBreadthField = document.getElementById("techBreadth-select");
+                  if (techBreadthField.value === "") {
+                    alert("Tech breadth must be selected!");
+                    return false;
+                  }
+                }
+              }
+            }
+          }
+          alert("Success!");
+          sendToFlask();
+          return true;
+        }
+      </script>
+    </div>
+
+  </body>
+</html>

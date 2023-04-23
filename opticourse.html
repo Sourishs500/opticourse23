@@ -94,6 +94,18 @@
         </li>
       </o1>
       
+      <label for="ge-keywords">GE Topics:</label>
+      <input type="text" id="ge-topic-select" required class="field" name="topicGE">
+
+      <label for="elective-keywords">Elective Topics:</label>
+      <input type="text" id="elective-topic-select" required class="field" name="topicElective">
+
+      <label for="difficulty">GE Difficulty Preference:</label>
+        <select id="diff" name="easy" class="field">
+          <option value="easy">Easy</option>
+          <option value="hard">Hard</option>
+      </select>
+
       <button type="submit" id="submit-button-Basic" value="Submit" onClick="return checkForm()">Submit</button>
 
     </form>

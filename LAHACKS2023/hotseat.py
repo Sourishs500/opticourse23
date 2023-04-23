@@ -14,8 +14,11 @@ summerCount = 0
 firstPass = False
 demandIndex = 70
 
-firstPassDate = "2023-02-22T21:26"
-altFirstPassDate = "2023-02-22T20:26"
+altFour = "2023-02-22T23"
+altThree = "2023-02-22T22"
+firstPassDate = "2023-02-22T21"
+altFirstPassDate = "2023-02-22T20"
+altTwo = "2023-02-22T19"
 
 
 fallGood = False
@@ -34,7 +37,7 @@ leastRecentYear = 23
 driver = webdriver.Chrome()
 driver.get("https://hotseat.io/")
 
-className = "COM SCI 32"
+className = "COM SCI 31"
 
 #Entering class name into the hotseat search bar, waiting for items in drop down menu to appear
 inputElement = driver.find_element(By.ID, "search-downshift-input-input")
@@ -49,7 +52,10 @@ except:
     print("Sorry, your wifi is too slow :(")
 
 # Hover over the element (may or may not be needed)
-inputElement = driver.find_element(By.ID, "search-downshift-input-item-0")
+if(className == "MATH 33A" or className == "MATH 33B"):
+    inputElement = driver.find_element(By.ID, "search-downshift-input-item-1")
+else:
+    inputElement = driver.find_element(By.ID, "search-downshift-input-item-0")
 hover = ActionChains(driver).move_to_element(inputElement)
 hover.perform()
 
@@ -97,12 +103,37 @@ inputElement = driver.find_element(By.XPATH, "/html/body/main/div/div[4]/div[1]/
 enrollmentCard = inputElement.get_attribute("data-react-props")
 
 firstPassinfo = ""
+secondPassTime = "never gonna be mentioned"
 
 splitUpEnrollmentCard = enrollmentCard.split("{")
+
+#gotta remove secondPassTime from the list
+
 for i in splitUpEnrollmentCard:
-    if(i.find(firstPassDate) > 0 or i.find(altFirstPassDate) > 0):
-        firstPassinfo = i
-        break
+    if(i.find("Second") > 0):
+        secondPassTime = i[i.find("time") + 7 : i.find("time") + 20]
+        year = int(secondPassTime[:4])
+        month = int(secondPassTime[5:7])
+        day = int(secondPassTime[8:10])
+        hour = int(secondPassTime[11:13]) - 15
+        continue
+    
+    #if(i.find(firstPassDate) > 0 or i.find(altFirstPassDate) > 0 or i.find(altTwo) > 0 or i.find(altThree) > 0 or i.find(altFour) > 0):
+        #firstPassinfo = i
+       # break
+    start = i.find("createdAt")
+    if(start > 0):
+        currentYear = int(i[start + 12 : start + 16])
+        currentMonth = (i[start + 17 : start + 19])
+        currentDay = (i[start + 20 : start + 22])
+        currentHour = (i[start + 23 : start + 25])
+        
+        if((int(currentYear) == year and int(currentMonth) >= month and int(currentDay) >= day and int(currentHour) >= hour)):
+            firstPassinfo = i
+            break
+
+
+
 firstPassinfo = firstPassinfo[firstPassinfo.find("enrollmentCount"):]
 
 
@@ -112,7 +143,7 @@ enrollmentCapacity = float(firstPassinfo[firstPassinfo.find(":") + 1 :firstPassi
 
 enrollPercentageByFirstPass = (firstPassenrollmentCount / enrollmentCapacity) * 100
 print(enrollPercentageByFirstPass)
-"""
+
 
 
 
@@ -196,10 +227,14 @@ if(winterGood):
     print(className + " is good for winter: offered " + str(int(winterPercentage)) + "% of the time in the winter" +  "\n")
 if(springGood):
     print(className + " is good for spring: offered " + str(int(springPercentage)) + "% of the time in the spring" + "\n")
+if(firstPass):
+    print(className + " should be first passed!")
+else:
+    print(className + " should be second passed!")
 
 print(allTerms)
 
-"""
+
 driver.quit()
 
 

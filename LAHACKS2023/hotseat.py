@@ -34,7 +34,7 @@ leastRecentYear = 23
 driver = webdriver.Chrome()
 driver.get("https://hotseat.io/")
 
-className = "COM SCI 31"
+className = "COM SCI 32"
 
 #Entering class name into the hotseat search bar, waiting for items in drop down menu to appear
 inputElement = driver.find_element(By.ID, "search-downshift-input-input")
@@ -110,7 +110,7 @@ firstPassenrollmentCount = float(firstPassinfo[firstPassinfo.find(":") + 1 :firs
 firstPassinfo = firstPassinfo[firstPassinfo.find(",") + 1:]
 enrollmentCapacity = float(firstPassinfo[firstPassinfo.find(":") + 1 :firstPassinfo.find(",")])
 
-enrollPercentageByFirstPass = firstPassenrollmentCount / enrollmentCapacity
+enrollPercentageByFirstPass = (firstPassenrollmentCount / enrollmentCapacity) * 100
 print(enrollPercentageByFirstPass)
 """
 
